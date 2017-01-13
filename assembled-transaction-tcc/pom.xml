@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.spirit</groupId>
+		<artifactId>assembled-transaction</artifactId>
+		<version>1.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>assembled-transaction-tcc</artifactId>
+	<packaging>pom</packaging>
+	<name>assembled-transaction-tcc</name>
+	<description>分布式事务方案--TCC，手工两段式提交，基于事务补偿机制</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.spirit</groupId>
+			<artifactId>assembled-transaction-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+	</dependencies>
+	<modules>
+		<module>assembled-transaction-tcc-api</module>
+		<module>assembled-transaction-tcc-support</module>
+		<module>assembled-transaction-tcc-gateway</module>
+	</modules>
+</project>
