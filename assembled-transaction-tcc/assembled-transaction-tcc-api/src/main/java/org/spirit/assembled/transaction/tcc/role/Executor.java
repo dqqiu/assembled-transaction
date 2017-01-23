@@ -9,7 +9,7 @@ import org.spirit.assembled.transaction.tcc.TransactionApi;
 /**
  * @description 执行者
  * @author qiudequan
- * @createTime : 2017年1月10日 下午1:20:26 
+ * @createTime 2017年1月10日 下午1:20:26 
  */
 public class Executor implements Serializable, TransactionApi {
 

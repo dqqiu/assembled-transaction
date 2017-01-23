@@ -6,10 +6,22 @@ import java.util.UUID;
 /**
  * @description 事务上下文
  * @author qiudequan
- * @createTime : 2017年1月6日 下午4:44:49
+ * @createTime 2017年1月6日 下午4:44:49
  */
 public class UUIDUtils {
   private UUIDUtils() {}
+  
+  /**
+   * @description 获取32位UUID，即去掉了UUID中的"-"后的字符串
+   * @author qiudequan
+   * @return 32位UUID
+   * @createTime    2017年1月15日 上午11:03:36
+   */
+  public static String get32UUID() {
+  	String sourceUUID = UUID.randomUUID().toString();
+  	sourceUUID = sourceUUID.replaceAll("-", "");
+  	return sourceUUID;
+  }
 
   /**
    *  @description 字节数组转UUID

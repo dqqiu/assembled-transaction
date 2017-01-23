@@ -10,7 +10,7 @@ import org.spirit.assembled.transaction.api.utils.UUIDUtils;
 /**
  * @description 实现XA规范的事务Xid
  * @author qiudequan
- * @createTime : 2017年1月6日 下午2:20:06 
+ * @createTime 2017年1月6日 下午2:20:06 
  */
 public class TransactionXid implements Xid, Serializable {
 
@@ -30,8 +30,16 @@ public class TransactionXid implements Xid, Serializable {
   public byte[] getBranchQualifier() {
     return branchQualifier;
   }
+  
+  public void setBranchQualifier(byte[] branchQualifier) {
+		this.branchQualifier = branchQualifier;
+	}
 
-  @Override
+	public void setGlobalTransactionId(byte[] globalTransactionId) {
+		this.globalTransactionId = globalTransactionId;
+	}
+
+	@Override
   public int getFormatId() {
     return formatId;
   }

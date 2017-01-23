@@ -57,7 +57,7 @@ public abstract class AbstractCacheableRepository implements TransactionReposito
       transaction = makeFindByXid(xid);
 
       if(transaction != null) {
-        cache.put(xid, transaction);
+//        cache.put(xid, transaction);
       }
     }
     return transaction;

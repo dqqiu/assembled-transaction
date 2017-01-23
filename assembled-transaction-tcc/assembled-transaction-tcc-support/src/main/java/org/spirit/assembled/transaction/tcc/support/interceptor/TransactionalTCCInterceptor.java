@@ -1,7 +1,6 @@
 package org.spirit.assembled.transaction.tcc.support.interceptor;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.omg.PortableServer.ServantActivator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spirit.assembled.transaction.tcc.TransactionContext;
@@ -27,7 +26,9 @@ public class TransactionalTCCInterceptor {
   
   public void interceptorTccMethod(ProceedingJoinPoint joinPoint) {
     TransactionContext transactionContext = getTransactionContext(joinPoint.getArgs());
-    
+    if(transactionContext != null) {
+    	
+    }
   }
   
   public static TransactionContext getTransactionContext(Object[] args) {

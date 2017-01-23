@@ -5,7 +5,7 @@ import java.util.Collection;
 /**
  * @description 事务状态枚举
  * @author qiudequan
- * @createTime : 2017年1月6日 下午2:29:06 
+ * @createTime 2017年1月6日 下午2:29:06 
  */
 public class CollectionUtils {
   private CollectionUtils() {}

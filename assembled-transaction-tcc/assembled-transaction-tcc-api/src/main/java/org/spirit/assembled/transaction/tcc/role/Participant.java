@@ -8,7 +8,7 @@ import org.spirit.assembled.transaction.tcc.TransactionXid;
 /**
  * @description 参与者，全局可存在多个
  * @author qiudequan
- * @createTime : 2017年1月10日 下午1:20:06 
+ * @createTime 2017年1月10日 下午1:20:06 
  */
 public class Participant implements Serializable, TransactionApi {
 

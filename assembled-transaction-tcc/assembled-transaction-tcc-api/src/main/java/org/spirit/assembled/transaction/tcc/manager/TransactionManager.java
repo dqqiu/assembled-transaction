@@ -14,7 +14,7 @@ import org.spirit.assembled.transaction.tcc.exception.ConfirmException;
 /**
  * @description 事务管理器
  * @author qiudequan
- * @createTime : 2017年1月6日 下午2:20:06 
+ * @createTime 2017年1月6日 下午2:20:06 
  */
 public class TransactionManager implements TransactionApi {
   static final Logger LOG = LoggerFactory.getLogger(TransactionManager.class.getSimpleName());
@@ -45,7 +45,7 @@ public class TransactionManager implements TransactionApi {
   public void commit() {
     Transaction commitTransaction = getCurrentTransaction();
     // 修改为确认状态
-    commitTransaction.setStatus(TransactionStatus.CONFIRM);
+    commitTransaction.setTransactionStatus(TransactionStatus.CONFIRM);
     try {
       commitTransaction.commit();
     } catch (Exception e) {
@@ -59,7 +59,7 @@ public class TransactionManager implements TransactionApi {
   public void rollback() {
     Transaction commitTransaction = getCurrentTransaction();
     // 修改为取消状态
-    commitTransaction.setStatus(TransactionStatus.CANCEL);
+    commitTransaction.setTransactionStatus(TransactionStatus.CANCEL);
     try {
       commitTransaction.rollback();
     } catch (Exception e) {

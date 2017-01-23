@@ -3,7 +3,7 @@ package org.spirit.assembled.transaction.tcc;
 /**
  * @description 事务状态枚举
  * @author qiudequan
- * @createTime : 2017年1月6日 下午2:20:06 
+ * @createTime 2017年1月6日 下午2:20:06 
  */
 public enum TransactionStatus {
   TRY(1), // 尝试阶段
@@ -26,7 +26,7 @@ public enum TransactionStatus {
    *  @Creation Date  : 2017年1月6日 下午2:36:28 
    *  @Author         : qiudequan
    */
-  public TransactionStatus valueOf(int status) {
+  public static TransactionStatus valueOf(int status) {
     switch (status) {
       case 1:
         return TransactionStatus.TRY;
@@ -35,7 +35,7 @@ public enum TransactionStatus {
       case 3:
         return TransactionStatus.CANCEL;
       default:
-        throw new IllegalArgumentException("Transaction status must be within (1, 2, 3)!");
+        throw new IllegalArgumentException("Transaction status must be within (1, 2, 3).");
     }
   }
 }

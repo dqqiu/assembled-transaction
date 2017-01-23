@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * @description 事务上下文
  * @author qiudequan
- * @createTime : 2017年1月6日 下午2:20:06 
+ * @createTime 2017年1月6日 下午2:20:06 
  */
 public class TransactionContext implements Serializable {
 

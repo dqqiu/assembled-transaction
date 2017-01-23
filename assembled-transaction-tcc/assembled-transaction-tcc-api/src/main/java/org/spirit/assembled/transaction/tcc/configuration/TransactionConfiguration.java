@@ -6,7 +6,7 @@ import org.spirit.assembled.transaction.tcc.repository.TransactionRepository;
 /**
  * @description 事务配置类
  * @author qiudequan
- * @createTime : 2017年1月6日 下午4:33:06 
+ * @createTime 2017年1月6日 下午4:33:06 
  */
 public interface TransactionConfiguration {
   /**

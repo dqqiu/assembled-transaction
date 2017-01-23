@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 /**
  * @description 事务注解
  * @author qiudequan
- * @createTime : 2017年1月6日 下午4:10:26 
+ * @createTime 2017年1月6日 下午4:10:26 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = {ElementType.METHOD})

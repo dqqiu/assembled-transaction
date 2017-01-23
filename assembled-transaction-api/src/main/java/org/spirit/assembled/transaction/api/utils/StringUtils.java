@@ -3,7 +3,7 @@ package org.spirit.assembled.transaction.api.utils;
 /**
  * @description 字符串工具类
  * @author qiudequan
- * @createTime : 2017年1月6日 下午2:28:24
+ * @createTime 2017年1月6日 下午2:28:24
  */
 public class StringUtils {
   private StringUtils() {}

@@ -3,7 +3,8 @@ package org.spirit.assembled.transaction.api.bean;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.sf.ehcache.CacheManager;
+import org.spirit.assembled.transaction.api.utils.EhcacheUtils;
+
 import net.sf.ehcache.Element;
 
 /**
@@ -12,16 +13,15 @@ import net.sf.ehcache.Element;
  * @createTime 2017年1月11日 下午12:35:20 
  */
 public class Cache<K, V>{
-  private static final CacheManager CACHE_MANAGER = new CacheManager();
   private net.sf.ehcache.Cache cache;
   private int expire  = 300;
   
   public Cache(String cacheName) {
-    cache = CACHE_MANAGER.getCache(cacheName);
+    cache = EhcacheUtils.getCacheManager().getCache(cacheName);
   }
   
   public Cache(String cacheName, int expire) {
-    cache = CACHE_MANAGER.getCache(cacheName);
+    cache = EhcacheUtils.getCacheManager().getCache(cacheName);
     this.expire = expire;
   }
   
