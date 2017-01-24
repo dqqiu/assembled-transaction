@@ -4,10 +4,12 @@
 	<diskStore path="../tmp/assembled/transaction/ehcache" />
 
 	<!-- 默认缓存配置. -->
-	<defaultCache maxEntriesLocalHeap="100" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
-		overflowToDisk="true" maxEntriesLocalDisk="100000" />
-	
+	<defaultCache maxEntriesLocalHeap="100" eternal="false"
+		timeToIdleSeconds="300" timeToLiveSeconds="600" overflowToDisk="true"
+		maxEntriesLocalDisk="100000" />
+
 	<!-- 事务缓存 -->
-	<cache name="transactionCache" maxEntriesLocalHeap="100" eternal="true" overflowToDisk="true"/>
+	<cache name="transactionCache" maxEntriesLocalHeap="100" eternal="true"
+		overflowToDisk="true" />
 
 </ehcache>

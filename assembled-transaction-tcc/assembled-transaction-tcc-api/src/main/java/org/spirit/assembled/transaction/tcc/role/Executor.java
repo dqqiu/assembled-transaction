@@ -2,7 +2,7 @@ package org.spirit.assembled.transaction.tcc.role;
 
 import java.io.Serializable;
 
-import org.spirit.assembled.transaction.api.bean.ReflectContext;
+import org.spirit.assembled.transaction.api.common.ReflectContext;
 import org.spirit.assembled.transaction.api.utils.ReflectUtils;
 import org.spirit.assembled.transaction.tcc.TransactionApi;
 

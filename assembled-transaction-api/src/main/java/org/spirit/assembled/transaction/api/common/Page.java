@@ -1,4 +1,4 @@
-package org.spirit.assembled.transaction.api.bean;
+package org.spirit.assembled.transaction.api.common;
 
 import java.util.List;
 

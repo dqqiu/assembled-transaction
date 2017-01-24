@@ -2,7 +2,7 @@ package org.spirit.assembled.transaction.api.utils;
 
 import java.lang.reflect.Method;
 
-import org.spirit.assembled.transaction.api.bean.ReflectContext;
+import org.spirit.assembled.transaction.api.common.ReflectContext;
 import org.spirit.assembled.transaction.api.exception.ReflectException;
 
 /**

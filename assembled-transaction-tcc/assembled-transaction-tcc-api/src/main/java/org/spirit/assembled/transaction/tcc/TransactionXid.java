@@ -1,6 +1,7 @@
 package org.spirit.assembled.transaction.tcc;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.UUID;
 
 import javax.transaction.xa.Xid;
@@ -23,7 +24,14 @@ public class TransactionXid implements Xid, Serializable {
   public TransactionXid() {
     // 进行初始化
     branchQualifier = UUIDUtils.uuid2ByteArray(UUID.randomUUID());
+    System.out.println(UUIDUtils.byteArray2UUID(branchQualifier).toString());
     globalTransactionId = UUIDUtils.uuid2ByteArray(UUID.randomUUID());
+    System.out.println(UUIDUtils.byteArray2UUID(globalTransactionId).toString());
+  }
+  
+  public TransactionXid(byte[] branchQualifier, byte[] globalTransactionId) {
+    this.branchQualifier = branchQualifier;
+    this.globalTransactionId = globalTransactionId;
   }
 
   @Override
@@ -49,4 +57,46 @@ public class TransactionXid implements Xid, Serializable {
     return globalTransactionId;
   }
 
+  public TransactionXid clone() {
+    byte[] cloneBranchQualifier = new byte[branchQualifier.length];
+    byte[] cloneGlobalTransactionId = new byte[globalTransactionId.length];
+
+    System.arraycopy(branchQualifier, 0, cloneBranchQualifier, 0, branchQualifier.length);
+    System.arraycopy(globalTransactionId, 0, cloneGlobalTransactionId, 0, globalTransactionId.length);
+
+    return new TransactionXid(cloneBranchQualifier, cloneGlobalTransactionId);
+  }
+
+  @Override
+  public int hashCode() {
+    return Arrays.hashCode(new Object[]{branchQualifier, globalTransactionId, formatId});
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    // 重写此方法，以便ehcache能够正确获取缓存
+    if(this == obj) {
+      return true;
+    }
+    if(obj == null) {
+      return false;
+    }
+    if(this.getClass() != obj.getClass()) {
+      return false;
+    }
+     TransactionXid tx = (TransactionXid) obj;
+     if(this.getFormatId() != tx.getFormatId()) {
+       return false;
+     }
+     if(!Arrays.equals(this.getBranchQualifier(), tx.getBranchQualifier())) {
+       return false;
+     }
+     if(!Arrays.equals(this.getGlobalTransactionId(), tx.getGlobalTransactionId())) {
+       return false;
+     }
+     return true;
+  }
+  
+  
+  
 }

@@ -10,6 +10,8 @@ import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.spirit.assembled.transaction.api.serializer.JdkSerializer;
+import org.spirit.assembled.transaction.api.serializer.Serializer;
 import org.spirit.assembled.transaction.api.utils.CollectionUtils;
 import org.spirit.assembled.transaction.api.utils.DataSourceUtils;
 import org.spirit.assembled.transaction.api.utils.StringUtils;
@@ -25,13 +27,15 @@ import org.spirit.assembled.transaction.tcc.TransactionXid;
  * @createTime 2017年1月11日 下午13:51:29 
  */
 public class DatabaseRepository extends AbstractCacheableRepository {
-	final Logger LOG = LoggerFactory.getLogger(DatabaseRepository.class);
+    static final Logger LOG = LoggerFactory.getLogger(DatabaseRepository.class);
 	// 数据源
 	private DataSource dataSource;
 	// 相关表名
 	private String tableName;
 	// 事务域
 	private String region;
+	
+	private Serializer<Transaction> serializer = new JdkSerializer<>();
 
 	public DatabaseRepository(String cacheName) {
 		super(cacheName);
@@ -69,15 +73,17 @@ public class DatabaseRepository extends AbstractCacheableRepository {
 		
 		StringBuilder sqlBuilder = new StringBuilder();
 		sqlBuilder.append("INSERT INTO ").append(tableName);
-		sqlBuilder.append(" (XID, REGION, GLOBAL_XID, BRANCH_QUALIFIER, TRANSACTION_STATUS,");
+		sqlBuilder.append(" (XID, CONTENT, REGION, GLOBAL_XID, BRANCH_QUALIFIER, TRANSACTION_STATUS,");
 		sqlBuilder.append(" TRANSACTION_TYPE, RETRY_TIME, CREATE_BY, CREATE_TIME,");
 		sqlBuilder.append(" UPDATE_BY, UPDATE_TIME, VERSION) VALUES");
-		sqlBuilder.append(" (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		sqlBuilder.append(" (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		Connection connection = DataSourceUtils.getConnection(dataSource);
-		int length = 12;
+		int length = 13;
 		int index = 0;
 		Object[] args = new Object[length];
-		args[index++] = UUIDUtils.get32UUID();
+		transaction.setId(UUIDUtils.get32UUID());
+		args[index++] = transaction.getId();
+		args[index++] = serializer.serialize(transaction);
 		args[index++] = region;
 		args[index++] = transaction.getXid().getGlobalTransactionId();
 		args[index++] = transaction.getXid().getBranchQualifier();
@@ -118,8 +124,9 @@ public class DatabaseRepository extends AbstractCacheableRepository {
 		StringBuilder sqlBuilder = new StringBuilder();
 		List<Object> argsList = new ArrayList<>();
 		sqlBuilder.append("UPDATE ").append(tableName);
-		sqlBuilder.append(" SET TRANSACTION_STATUS = ?, UPDATE_TIME = ?, RETRY_TIME = ?, VERSION = VERSION + 1");
+		sqlBuilder.append(" SET CONTENT = ?, TRANSACTION_STATUS = ?, UPDATE_TIME = ?, RETRY_TIME = ?, VERSION = VERSION + 1");
 		sqlBuilder.append(" WHERE GLOBAL_XID = ? AND BRANCH_QUALIFIER = ? AND VERSION = ?");
+		argsList.add(serializer.serialize(transaction));
 		argsList.add(transaction.getTransactionStatus().getStatus());
 		argsList.add(transaction.getUpdateTime());
 		argsList.add(transaction.getRetryTime());
@@ -142,7 +149,7 @@ public class DatabaseRepository extends AbstractCacheableRepository {
 		StringBuilder sqlBuilder = new StringBuilder();
 		List<Object> argsList = new ArrayList<>();
 		sqlBuilder.append("SELECT");
-		sqlBuilder.append(" XID, REGION, GLOBAL_XID, BRANCH_QUALIFIER, TRANSACTION_STATUS,");
+		sqlBuilder.append(" XID, CONTENT, REGION, GLOBAL_XID, BRANCH_QUALIFIER, TRANSACTION_STATUS,");
 		sqlBuilder.append(" TRANSACTION_TYPE, RETRY_TIME, CREATE_BY, CREATE_TIME,");
 		sqlBuilder.append(" UPDATE_BY, UPDATE_TIME, VERSION");
 		sqlBuilder.append(" FROM ").append(tableName);
@@ -158,19 +165,22 @@ public class DatabaseRepository extends AbstractCacheableRepository {
 		if(CollectionUtils.isEmpty(transactionList)) {
 			return null;
 		}
-		Transaction transaction = new Transaction();
+//		Transaction transaction = new Transaction();
 		Map<String, Object> map = transactionList.get(0);
-		transaction.getXid().setGlobalTransactionId((byte[]) map.get("GLOBAL_XID"));
-		transaction.getXid().setBranchQualifier((byte[]) map.get("BRANCH_QUALIFIER"));
-		transaction.setTransactionStatus(TransactionStatus.valueOf((int) map.get("TRANSACTION_STATUS")));
-		transaction.setTransactionType(TransactionType.valueOf((int) map.get("TRANSACTION_TYPE")));
-		transaction.setCreateBy((String) map.get("CREATE_BY"));
-		transaction.setUpdateBy((String) map.get("UPDATE_BY"));
-		transaction.setCreateTime((Date) map.get("CREATE_TIME"));
-		transaction.setUpdateTime((Date) map.get("UPDATE_TIME"));
-		transaction.setRetryTime((int) map.get("RETRY_TIME"));
-		transaction.setVersion((Long) map.get("VERSION"));
-		return transaction;
+//		transaction.setId(map.get("XID").toString());
+//		
+//		transaction.getTransactionXid().setGlobalTransactionId((byte[]) map.get("GLOBAL_XID"));
+//		transaction.getTransactionXid().setBranchQualifier((byte[]) map.get("BRANCH_QUALIFIER"));
+//		transaction.setTransactionStatus(TransactionStatus.valueOf((int) map.get("TRANSACTION_STATUS")));
+//		transaction.setTransactionType(TransactionType.valueOf((int) map.get("TRANSACTION_TYPE")));
+//		transaction.setCreateBy((String) map.get("CREATE_BY"));
+//		transaction.setUpdateBy((String) map.get("UPDATE_BY"));
+//		transaction.setCreateTime((Date) map.get("CREATE_TIME"));
+//		transaction.setUpdateTime((Date) map.get("UPDATE_TIME"));
+//		transaction.setRetryTime((int) map.get("RETRY_TIME"));
+//		transaction.setVersion((Long) map.get("VERSION"));
+		
+		return serializer.deserialize((byte[]) map.get("CONTENT"));
 	}
 
 }

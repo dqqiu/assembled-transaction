@@ -2,7 +2,7 @@ package org.spirit.assembled.transaction.tcc.support.repository;
 
 import javax.transaction.xa.Xid;
 
-import org.spirit.assembled.transaction.api.bean.Cache;
+import org.spirit.assembled.transaction.api.common.Cache;
 import org.spirit.assembled.transaction.tcc.Transaction;
 import org.spirit.assembled.transaction.tcc.TransactionXid;
 import org.spirit.assembled.transaction.tcc.repository.TransactionRepository;
@@ -36,7 +36,7 @@ public abstract class AbstractCacheableRepository implements TransactionReposito
   public int delete(Transaction transaction) {
     int result = makeDelete(transaction);
     if(result > 0) {
-      cache.put(transaction.getXid(), transaction);
+      cache.remove(transaction.getXid());
     }
     return result;
   }
@@ -57,7 +57,7 @@ public abstract class AbstractCacheableRepository implements TransactionReposito
       transaction = makeFindByXid(xid);
 
       if(transaction != null) {
-//        cache.put(xid, transaction);
+        cache.put(xid, transaction);
       }
     }
     return transaction;

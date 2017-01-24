@@ -12,7 +12,6 @@ public class EhcacheUtils {
 	private static final CacheManager CACHE_MANAGER = CacheManager.create(EhcacheUtils.class.getResource("/ehcache.xml"));
 	
 	public static CacheManager getCacheManager() {
-		System.out.println(EhcacheUtils.class.getResource("/ehcache.xml").getPath());
 		return CACHE_MANAGER;
 	}
 }

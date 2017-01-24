@@ -1,4 +1,4 @@
-package org.spirit.assembled.transaction.api.bean;
+package org.spirit.assembled.transaction.api.common;
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -14,6 +14,7 @@ import net.sf.ehcache.Element;
  */
 public class Cache<K, V>{
   private net.sf.ehcache.Cache cache;
+  
   private int expire  = 300;
   
   public Cache(String cacheName) {

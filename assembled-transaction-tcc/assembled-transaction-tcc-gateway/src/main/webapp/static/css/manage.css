@@ -1,0 +1,145 @@
+@CHARSET "UTF-8";
+
+html, body {
+	height: 100%;
+	background-color: #FFF;
+	min-width: 680px;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+body {
+	font-size: 12px;
+	font-family: "Microsoft YaHei";
+	color: #666;
+}
+
+.search-console {
+	height: 100%;
+}
+
+.search-box {
+	height: 100px;
+	background-color: #00BAF2;
+	line-height: 100px;
+}
+
+.search-region {
+	text-align: center;
+}
+
+.search-key {
+	color: #FFF;
+}
+
+.input-search {
+	outline: none;
+	width: 320px;
+	height: 36px;
+	line-height: 36px;
+	font-size: 16px;
+	text-indent: 15px;
+	border: 0;
+	padding: 0;
+	border-radius: 8px 0 0 8px;
+	-o-border-radius: 8px 0 0 8px;
+	-moz-border-radius: 8px 0 0 8px;
+	-webkit-border-radius: 8px 0 0 8px;
+}
+
+.btn-search {
+	outline: none;
+	width: 85px;
+	height: 36px;
+	line-height: 36px;
+	font-size: 16px;
+	border: 0;
+	padding: 0;
+	color: #FFF;
+	background-color: #DDA0DD;
+	font-weight: bold;
+	border-radius: 0 8px 8px 0;
+	-o-border-radius: 0 8px 8px 0;
+	-moz-border-radius: 0 8px 8px 0;
+	-webkit-border-radius: 0 8px 8px 0;
+}
+
+.search-result {
+	background-color: #FFF;
+}
+
+.result-container {
+	padding: 0 30px;
+}
+
+.result-table {
+	margin-top: 30px;
+	background-color: #FFF;
+	border-collapse: collapse;
+	border: 1px solid #E0E0E0;
+	width: 100%;
+}
+
+.result-table tr td, .result-table tr th {
+	text-align: center;
+	padding: 10px;
+}
+
+.result-table tr th {
+	background-color: #EDEDED;
+	color: #333;
+	font-size: 14px;
+}
+
+.pager {
+	height: 30px;
+	line-height: 30px;
+	margin-top: 20px;
+}
+
+.pager .pager-info {
+	float: left;
+	font-size: 14px;
+}
+
+.pager .pager-items {
+	float: right;
+}
+
+.pager .pager-items .pager-item {
+	height: auto;
+	display: inline-block;
+	width: 40px;
+	height: 30px;
+	text-align: center;
+	background-color: #FFF;
+	border: 1px solid #EEE;
+	color: #666;
+	margin: 0 2px;
+}
+
+.pager .pager-items .pager-item.active {
+	color: #FFF;
+	background-color: #00BAF2;
+}
+
+.pager .pager-items .pager-item:hover {
+	color: #FFF;
+	background-color: #00BAF2;
+	cursor: pointer;
+}
+
+.pager .pager-items .pager-item.prev {
+	background: url("../images/prev.png") no-repeat center center;
+}
+
+.pager .pager-items .pager-item.next {
+	background: url("../images/next.png") no-repeat center center;
+}
