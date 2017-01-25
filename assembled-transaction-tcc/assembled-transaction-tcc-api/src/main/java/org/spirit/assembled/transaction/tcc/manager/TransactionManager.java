@@ -10,6 +10,7 @@ import org.spirit.assembled.transaction.tcc.TransactionType;
 import org.spirit.assembled.transaction.tcc.configuration.TransactionConfiguration;
 import org.spirit.assembled.transaction.tcc.exception.CancelException;
 import org.spirit.assembled.transaction.tcc.exception.ConfirmException;
+import org.spirit.assembled.transaction.tcc.exception.NoExistTransactionException;
 
 /**
  * @description 事务管理器
@@ -35,10 +36,21 @@ public class TransactionManager implements TransactionApi {
     localTransaction.set(masterTransaction);
   }
   
-  public void begin(TransactionContext context) {
-    Transaction speTransaction = new Transaction(context);
-    transactionConfiguration.getTransactionRepository().create(speTransaction);
-    localTransaction.set(speTransaction);
+  public void begin(TransactionContext context) throws NoExistTransactionException {
+    // 查找到当前的事务，并开始事务
+    Transaction curTransaction = transactionConfiguration.getTransactionRepository().findByXid(context.getXid());
+    if(curTransaction != null) {
+      curTransaction.setTransactionStatus(TransactionStatus.valueOf(context.getStatus()));
+      localTransaction.set(curTransaction);
+    } else {
+      throw new NoExistTransactionException();
+    }
+  }
+  
+  public void newTransaction(TransactionContext context) {
+    Transaction curTransaction = new Transaction(context);
+    transactionConfiguration.getTransactionRepository().create(curTransaction);
+    localTransaction.set(curTransaction);
   }
   
   @Override

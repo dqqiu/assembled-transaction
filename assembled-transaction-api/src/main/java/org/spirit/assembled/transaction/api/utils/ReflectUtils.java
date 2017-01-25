@@ -35,4 +35,33 @@ public class ReflectUtils {
     }
     return null;
   }
+  
+  /**
+   *  @description 获取方法所在类
+   *  @param clz 目标类
+   *  @param methodName 方法名
+   *  @param parameterTypes 参数数组
+   *  @return Class<?> 方法所在类
+   *  @createTime 2017年1月25日 下午1:16:44 
+   *  @author qiudequan
+   */
+  public static Class<?> getTypeByMethod(Class<?> clz, String methodName, Class<?>[] parameterTypes) {
+    Method method = null;
+    Class<?> targetClass = clz;
+    do {
+        Class<?>[] clazzes = targetClass.getInterfaces();
+        for (Class<?> clazz : clazzes) {
+            try {
+                method = clazz.getDeclaredMethod(methodName, parameterTypes);
+            } catch (NoSuchMethodException e) {
+                method = null;
+            }
+            if (method != null) {
+                return clazz;
+            }
+        }
+        targetClass = targetClass.getSuperclass();
+    } while (!targetClass.equals(Object.class));
+    return clz;
+  }
 }

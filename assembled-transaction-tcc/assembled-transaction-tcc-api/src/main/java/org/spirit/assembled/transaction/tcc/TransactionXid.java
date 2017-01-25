@@ -29,6 +29,11 @@ public class TransactionXid implements Xid, Serializable {
     System.out.println(UUIDUtils.byteArray2UUID(globalTransactionId).toString());
   }
   
+  public TransactionXid(byte[] globalTransactionId) {
+    this.globalTransactionId = globalTransactionId;
+    branchQualifier = UUIDUtils.uuid2ByteArray(UUID.randomUUID());
+  }
+  
   public TransactionXid(byte[] branchQualifier, byte[] globalTransactionId) {
     this.branchQualifier = branchQualifier;
     this.globalTransactionId = globalTransactionId;

@@ -1,9 +1,7 @@
-package org.spirit.assembled.transaction.tcc.support.common;
+package org.spirit.assembled.transaction.tcc.support.role.analyze;
 
 import org.spirit.assembled.transaction.tcc.TransactionContext;
 import org.spirit.assembled.transaction.tcc.role.TransactionMethodRole;
-
-import com.alibaba.druid.sql.ast.statement.SQLIfStatement.Else;
 
 /**
  * @description TCC方法扩展支持类           
