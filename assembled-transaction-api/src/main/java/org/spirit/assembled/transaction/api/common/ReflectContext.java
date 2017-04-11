@@ -19,7 +19,9 @@ public class ReflectContext implements Serializable {
   // 参数值
   private Object[] args;
   
-  public ReflectContext() {}
+  public ReflectContext() {
+    // 无参构造
+  }
   
   public ReflectContext(Class<?> targetClass, String targetMethod, Class<?>[] params, Object[] args) {
     this.targetClass = targetClass;

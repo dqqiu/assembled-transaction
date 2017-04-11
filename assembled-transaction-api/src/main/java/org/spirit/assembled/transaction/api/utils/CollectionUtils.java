@@ -3,7 +3,7 @@ package org.spirit.assembled.transaction.api.utils;
 import java.util.Collection;
 
 /**
- * @description 事务状态枚举
+ * @description 集合辅助攻击类
  * @author qiudequan
  * @createTime 2017年1月6日 下午2:29:06 
  */

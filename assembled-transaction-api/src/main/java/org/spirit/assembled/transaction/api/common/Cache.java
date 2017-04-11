@@ -8,7 +8,7 @@ import org.spirit.assembled.transaction.api.utils.EhcacheUtils;
 import net.sf.ehcache.Element;
 
 /**
- * @description ehcache
+ * @description 自定义缓存(基于Ehcache)
  * @author qiudequan
  * @createTime 2017年1月11日 下午12:35:20 
  */

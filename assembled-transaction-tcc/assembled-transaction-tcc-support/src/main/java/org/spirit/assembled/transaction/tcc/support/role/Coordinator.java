@@ -4,6 +4,8 @@ import java.lang.reflect.Method;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.spirit.assembled.transaction.api.common.ReflectContext;
 import org.spirit.assembled.transaction.api.utils.ReflectUtils;
 import org.spirit.assembled.transaction.tcc.Transaction;
@@ -24,6 +26,7 @@ import org.spirit.assembled.transaction.tcc.support.role.analyze.TransactionMeth
  * @createTime 2017年1月10日 下午1:20:26 
  */
 public class Coordinator {
+  protected static Logger LOG = LoggerFactory.getLogger(Coordinator.class);
   protected TransactionConfiguration transactionConfiguration;
 
   public TransactionConfiguration getTransactionConfiguration() {
@@ -167,6 +170,7 @@ public class Coordinator {
         }
 
       } catch (NoSuchMethodException e) {
+        LOG.warn("Did not find the method[{}].", targetMethod != null ? targetMethod.getName() : "");
         transactionalTCC = null;
       }
     }

@@ -62,6 +62,7 @@ public class TransactionXid implements Xid, Serializable {
     return globalTransactionId;
   }
 
+  // 对象复制
   public TransactionXid clone() {
     byte[] cloneBranchQualifier = new byte[branchQualifier.length];
     byte[] cloneGlobalTransactionId = new byte[globalTransactionId.length];

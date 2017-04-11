@@ -2,7 +2,6 @@ package org.spirit.assembled.transaction.tcc.support.repository;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -17,8 +16,6 @@ import org.spirit.assembled.transaction.api.utils.DataSourceUtils;
 import org.spirit.assembled.transaction.api.utils.StringUtils;
 import org.spirit.assembled.transaction.api.utils.UUIDUtils;
 import org.spirit.assembled.transaction.tcc.Transaction;
-import org.spirit.assembled.transaction.tcc.TransactionStatus;
-import org.spirit.assembled.transaction.tcc.TransactionType;
 import org.spirit.assembled.transaction.tcc.TransactionXid;
 
 /**
@@ -165,21 +162,8 @@ public class DatabaseRepository extends AbstractCacheableRepository {
 		if(CollectionUtils.isEmpty(transactionList)) {
 			return null;
 		}
-//		Transaction transaction = new Transaction();
-		Map<String, Object> map = transactionList.get(0);
-//		transaction.setId(map.get("XID").toString());
-//		
-//		transaction.getTransactionXid().setGlobalTransactionId((byte[]) map.get("GLOBAL_XID"));
-//		transaction.getTransactionXid().setBranchQualifier((byte[]) map.get("BRANCH_QUALIFIER"));
-//		transaction.setTransactionStatus(TransactionStatus.valueOf((int) map.get("TRANSACTION_STATUS")));
-//		transaction.setTransactionType(TransactionType.valueOf((int) map.get("TRANSACTION_TYPE")));
-//		transaction.setCreateBy((String) map.get("CREATE_BY"));
-//		transaction.setUpdateBy((String) map.get("UPDATE_BY"));
-//		transaction.setCreateTime((Date) map.get("CREATE_TIME"));
-//		transaction.setUpdateTime((Date) map.get("UPDATE_TIME"));
-//		transaction.setRetryTime((int) map.get("RETRY_TIME"));
-//		transaction.setVersion((Long) map.get("VERSION"));
 		
+		Map<String, Object> map = transactionList.get(0);
 		return serializer.deserialize((byte[]) map.get("CONTENT"));
 	}
 

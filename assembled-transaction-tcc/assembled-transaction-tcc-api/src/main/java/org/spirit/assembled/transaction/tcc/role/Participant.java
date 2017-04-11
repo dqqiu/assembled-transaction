@@ -14,6 +14,7 @@ public class Participant implements Serializable, TransactionApi {
 
   private static final long serialVersionUID = -2122567803379325565L;
   private TransactionXid xid;
+  // 事务执行者
   private Executor executor;
 
   public Participant() {
@@ -43,11 +44,13 @@ public class Participant implements Serializable, TransactionApi {
 
   @Override
   public void commit() {
-    executor.rollback();
+    // 交由事务执行者进行事务提交
+    executor.commit();
   }
 
   @Override
   public void rollback() {
+    // 交由事务执行者进行事务回滚
     executor.rollback();
   }
 
